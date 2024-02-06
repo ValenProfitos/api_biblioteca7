@@ -1,16 +1,17 @@
 const express = require("express");
 
+require("dotenv").config();
+
 const { auth } = require("express-oauth2-jwt-bearer");
 const errorHandler = require("./middlewares/errorHandler");
 
 
-require('dotenv').config();
-
 // Configuracion Middleware con el Servidor de Autorización 
 const autenticacion = auth({
+  secret: process.env.OAUTH_SECRET,
   audience: process.env.OAUTH_AUDIENCE,
   issuerBaseURL: process.env.OAUTH_URL,
-  tokenSigningAlg: "RS256",
+  tokenSigningAlg: process.env.OAUTH_TKNSINGIN,
 });
 
 
